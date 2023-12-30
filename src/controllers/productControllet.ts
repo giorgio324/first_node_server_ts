@@ -21,3 +21,14 @@ export const getSingleProduct: RequestHandler = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const addProduct: RequestHandler = async (req, res) => {
+  const { name } = req.body;
+  try {
+    await Product.create({ name });
+    return res.status(201).json({ name });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Oops.. Something went wrong" });
+  }
+};
